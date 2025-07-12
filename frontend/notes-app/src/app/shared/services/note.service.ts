@@ -1,39 +1,41 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { Note } from '../models/note';
 
-@Injectable({
-  providedIn: 'root'
-})
+export interface Note {
+  id?: string;
+  title: string;
+  content: string;
+  completed: boolean;
+  archived?: boolean;
+  category?: string;
+}
 
+@Injectable({ providedIn: 'root' })
 export class NoteService {
-    private apiUrl = `${environment.apiUrl}/api/notes`;
+  constructor(private http: HttpClient) {}
 
-    constructor(private http: HttpClient) {}
+  getActiveNotes(): Observable<Note[]> {
+    return this.http.get<Note[]>('/api/notes/active');
+  }
 
-    getActiveNotes(): Observable<Note[]> {
-        return this.http.get<Note[]>(`${this.apiUrl}/active`);
-    }
+  getArchivedNotes(): Observable<Note[]> {
+    return this.http.get<Note[]>('/api/notes/archived');
+  }
 
-    getArchivedNotes(): Observable<Note[]> {
-        return this.http.get<Note[]>(`${this.apiUrl}/archived`);
-    }
+  getNotesByCategory(category: string): Observable<Note[]> {
+    return this.http.get<Note[]>(`/api/notes/category/${category}`);
+  }
 
-    createNote(note: Note): Observable<Note> {
-        return this.http.post<Note>(this.apiUrl, note);
-    }
+  createNote(note: Note): Observable<Note> {
+    return this.http.post<Note>('/api/notes', note);
+  }
 
-    updateNote(id: number, note: Note): Observable<Note> {
-        return this.http.put<Note>(`${this.apiUrl}/${id}`, note);
-    }
+  updateNote(id: string, note: Note): Observable<Note> {
+    return this.http.put<Note>(`/api/notes/${id}`, note);
+  }
 
-    deleteNote(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${id}`);
-    }
-
-    getNotesByCategory(category: string): Observable<Note[]> {
-        return this.http.get<Note[]>(`${this.apiUrl}/category/${category}`);
-    }
+  deleteNote(id: string): Observable<void> {
+    return this.http.delete<void>(`/api/notes/${id}`);
+  }
 }

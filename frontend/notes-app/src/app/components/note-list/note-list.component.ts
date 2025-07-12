@@ -1,17 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { NoteFormComponent } from '../note-form/note-form.component';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { NoteService } from 'src/app/services/note.service';
 
 interface Note {
+  id?: string;
   title: string;
   content: string;
   completed: boolean;
+  archived?: boolean;
+  category?: string;
 }
+
 @Component({
   selector: 'app-note-list',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    NoteFormComponent,
+    ConfirmDialogComponent,
+  ],
   templateUrl: './note-list.component.html',
   styleUrls: ['./note-list.component.scss']
 })
-
 export class NoteListComponent implements OnInit {
   activeNotes: Note[] = [];
   archivedNotes: Note[] = [];
@@ -29,9 +53,9 @@ export class NoteListComponent implements OnInit {
     this.loadNotes();
   }
 
-   loadNotes(): void {
+  loadNotes(): void {
     this.loading = true;
-    
+
     if (this.selectedCategory) {
       this.noteService.getNotesByCategory(this.selectedCategory).subscribe(notes => {
         this.activeNotes = notes;
@@ -55,7 +79,7 @@ export class NoteListComponent implements OnInit {
     const allCategories = notes
       .map(note => note.category)
       .filter((category): category is string => !!category);
-    
+
     this.categories = [...new Set(allCategories)];
   }
 
@@ -113,5 +137,4 @@ export class NoteListComponent implements OnInit {
   toggleArchivedView(): void {
     this.showArchived = !this.showArchived;
   }
-  
 }

@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { MatToolbar } from "@angular/material/toolbar";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NoteListComponent } from './components/note-list/note-list.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, MatToolbarModule, NoteListComponent],
   template: `
     <mat-toolbar color="primary">Notas</mat-toolbar>
     <div class="main-container">
@@ -13,7 +17,9 @@ import { MatToolbar } from "@angular/material/toolbar";
     .main-container {
       padding: 1rem;
     }
-  `],
-  imports: [MatToolbar]
+    mat-toolbar {
+      margin-bottom: 1rem;
+    }
+  `]
 })
 export class AppComponent { }
