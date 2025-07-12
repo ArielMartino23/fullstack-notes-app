@@ -1,0 +1,18 @@
+<app-note-form></app-note-form>
+
+<div class="note-list">
+  <mat-card *ngFor="let note of notes; let i = index" class="note-card">
+    <mat-card-header>
+      <mat-card-title>{{ note.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ note.content }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="toggleCompleted(note)">
+        {{ note.completed ? 'Desmarcar' : 'Completar' }}
+      </button>
+      <button mat-button color="warn" (click)="deleteNote(i)">Eliminar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

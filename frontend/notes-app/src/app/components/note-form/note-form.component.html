@@ -1,0 +1,20 @@
+<mat-card>
+  <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title" required />
+      <mat-error *ngIf="noteForm.get('title')?.hasError('required')">El título es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contenido</mat-label>
+      <textarea matInput rows="4" formControlName="content"></textarea>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="completed">Completado</mat-checkbox>
+
+    <div class="btn-group">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </div>
+  </form>
+</mat-card>
