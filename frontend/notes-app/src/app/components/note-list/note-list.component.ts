@@ -7,8 +7,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { NoteFormComponent } from '../note-form/note-form.component';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { NoteService } from 'src/app/services/note.service';
+/*import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';*/
+import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
+/*import { NoteService } from 'src/app/services/note.service';*/
+import { NoteService } from '../../shared/services/note.service';
 
 interface Note {
   id?: string;
@@ -137,4 +139,7 @@ export class NoteListComponent implements OnInit {
   toggleArchivedView(): void {
     this.showArchived = !this.showArchived;
   }
+
+  toggleCompleted(note : Note) {}
+  deleteNote(i : number) {}
 }

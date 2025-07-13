@@ -1,7 +1,7 @@
 <app-note-form></app-note-form>
 
 <div class="note-list">
-  <mat-card *ngFor="let note of notes; let i = index" class="note-card">
+  <mat-card *ngFor="let note of activeNotes; let i = index" class="note-card">
     <mat-card-header>
       <mat-card-title>{{ note.title }}</mat-card-title>
     </mat-card-header>
