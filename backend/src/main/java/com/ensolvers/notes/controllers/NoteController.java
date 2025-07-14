@@ -3,7 +3,6 @@ package com.ensolvers.notes.controllers;
 import com.ensolvers.notes.models.Note;
 import com.ensolvers.notes.services.NoteService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,6 @@ import java.util.List;
 public class NoteController {
     private final NoteService noteService;
 
-    @Autowired
     public NoteController(NoteService noteService) {
         this.noteService = noteService;
     }
