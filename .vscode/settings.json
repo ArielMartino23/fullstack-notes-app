@@ -1,5 +1,6 @@
 {
     "java.project.sourcePaths": [
         "frontend/notes-app/src/app/shared/components/confirm-dialog"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }
